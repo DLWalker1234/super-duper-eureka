@@ -1,0 +1,21 @@
+.col-12.derp__comments
+  if derp.comments.length > 0
+    hr
+    each comment in derp.comments
+      if (comment && comment.user)
+        if (comment.commenterPicture)
+          img(class='derps__comment-image', src=comment.commenterPicture)
+        else
+          img(class='derps__comment-image', src='http://via.placeholder.com/20x20')
+        span.derp__username-date
+          span.derp__username
+            if (comment.commenterName && comment.user)
+                a(href="/users/" + comment.user)= comment.commenterName 
+            else if (comment.user)
+                a(href="/users/" + comment.user)= comment.user 
+          span.derp__date  • #{formatDate(derp.createdAt, "%b %d, %Y at %I:%M %p")}
+        p.derp__content= comment.body
+  hr
+  form(class="derp__comment-form" method="post", action="/derps/"+ derp._id + "/comments")
+    textarea(type='text', name="body", placeholder='Enter the comment')
+    button.btn(type='submit') Comment

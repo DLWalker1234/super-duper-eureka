@@ -1,0 +1,10 @@
+.new-derp.modal.fade
+  .modal-dialog(role='document')
+    .modal-content
+      .modal-header
+        button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+        h4.modal-title Compose new Derp
+      .modal-body
+        form(method='post', action='/derps')
+          textarea(type='text', name='body', placeholder='Enter your Derp here', maxlength='280')
+          button.btn.new-derp__button(type='submit') Derp

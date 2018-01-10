@@ -1,0 +1,17 @@
+.derp(data-derpId = derp._id)
+  .row
+    .col-1
+      img(class='derp__image', src=derp.user.github.avatar_url)
+    .col-11.derp__description
+      span.derp__username-date
+        span.derp__username
+          -var name = derp.user.name ? derp.user.name : derp.user.username
+          a(href="/users/"+derp.user._id) #{name}
+        span.derp__date
+          a(data-toggle='modal', href="#derp-modal-"+derp._id)  • #{formatDate(derp.createdAt, "%b %d, %Y at %I:%M %p")}
+      p.derp__content= derp.body
+      if (derp.user._id == req.user.id)
+        form.derp__form(action="/derps/"+derp.id+"?_method=DELETE", method="post")
+          a.btn.derp__edit(href="/derps/"+derp._id) Edit
+          button.btn.derp__delete(type="submit") Delete
+    include comments

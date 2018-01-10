@@ -1,0 +1,21 @@
+extends ../layouts/default
+
+block content
+  .row.derp-container
+    .col-xl-12.col-lg-12.first-column
+      .logged-user
+        .row.chatbox
+          - if (chats.length == 0)
+            h2 No chats sorry!
+          ul.chatlist
+            - if (chats)
+              each chat in chats
+                li
+                  img(class='derp__image', src=chat.sender.github.avatar_url)
+                  p.chatMessage
+                  a(class='sender', href="/users/" + chat.sender._id) 
+                    span.sender #{chat.sender.username}: 
+                  span.message #{chat.message}
+                  // makes the date readable 
+                  p.msgtime #{formatDate(chat.createdAt, "%b %d, %Y at %I:%M %p")}
+          
